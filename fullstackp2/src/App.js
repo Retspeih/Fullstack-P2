@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import data from './table-data.json'
+import './App.css'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+    const [info, setInfo] = useState(data);
+
+    return (
+        <div>
+            <div class="header">
+                <p class="centered-text">
+                    FRAMEWORKS
+                </p>
+            </div>
+            <Table striped bordered hover>
+                <tbody>
+                    {info.map((information) => (
+                        <tr>
+                            <td>{information.id}</td>
+                            <td>{information.firstName}</td>
+                            <td>{information.lastName}</td>
+                            <td>{information.username}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
+        </div>
+    );
+};
 
 export default App;
