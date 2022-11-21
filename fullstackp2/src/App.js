@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import data from './table-data.json'
 import Form from 'react-bootstrap/Form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import './App.css'
 
 function App() {
@@ -12,14 +14,14 @@ function App() {
 
     return (
         <div>
-            <div class="header">
-                <p class="centered-text">
-                    FRAMEWORKS
+            <div className="header">
+                <p className="centered-text">
+                <FontAwesomeIcon icon={faBars} /> FRAMEWORKS
                 </p>
             </div>
-            <Table striped bordered hover>
+            <Table borderless hover>
                 <thead>
-                    <tr class="centered-text">
+                    <tr className="centered-text bottom-border table">
                         <th>Title</th>
                         <th>Description</th>
                         <th>Deadline</th>
@@ -30,7 +32,7 @@ function App() {
                 </thead>
                 <tbody>
                     {info.map((information) => (
-                        <tr class="centered-text">
+                        <tr className="centered-text bottom-border">
                             <td>{information.id}</td>
                             <td>{information.firstName}</td>
                             <td>{information.lastName}</td>
@@ -49,8 +51,8 @@ function App() {
                             </td>
                             <td>
                                 <Stack>
-                                    <Button>action</Button>
-                                    <Button>delete</Button>
+                                    <Button className="action-buttons">action</Button>
+                                    <Button className="action-buttons" variant="danger">action</Button>
                                 </Stack>
                             </td>
                         </tr>

@@ -9,3 +9,16 @@
 .vertical {
     display: block;
 }
+
+.action-buttons {
+    padding: -100px;
+}
+
+.bottom-border {
+    box-shadow: 5px 1.5px 1.5px lightgray;
+}
+
+.table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
