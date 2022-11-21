@@ -4,5 +4,11 @@
         "firstName": "Jacob",
         "lastName": "Thornton",
         "username": "@fat"
+    },
+    {
+        "id": 1,
+        "firstName": "Jacob",
+        "lastName": "Thornton",
+        "username": "@fat"
     }
 ]
