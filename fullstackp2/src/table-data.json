@@ -1,38 +1,14 @@
 [
     {
         "id": 1,
-        "firstName": "Jacob",
-        "lastName": "Thornton",
-        "username": "@fat"
+        "description": "Jacob",
+        "deadline": "Thornton",
+        "priority": "@fat"
     },
     {
         "id": 1,
-        "firstName": "Jacob",
-        "lastName": "Thornton",
-        "username": "@fat"
-    },
-    {
-        "id": 1,
-        "firstName": "Jacob",
-        "lastName": "Thornton",
-        "username": "@fat"
-    },
-    {
-        "id": 1,
-        "firstName": "Jacob",
-        "lastName": "Thornton",
-        "username": "@fat"
-    },
-    {
-        "id": 1,
-        "firstName": "Jacob",
-        "lastName": "Thornton",
-        "username": "@fat"
-    },
-    {
-        "id": 1,
-        "firstName": "Jacob",
-        "lastName": "Thornton",
-        "username": "@fat"
+        "description": "Jacob",
+        "deadline": "Thornton",
+        "priority": "@fat"
     }
 ]

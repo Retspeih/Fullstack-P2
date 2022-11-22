@@ -1,9 +1,12 @@
 .centered-text {
     text-align: center;
+    top: 50%;
+    position: relative;
 }
 
 .header {
     font-size: 18px;
+    display: flex;
 }
 
 .vertical {
@@ -21,4 +24,8 @@
 .table {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.close {
+    display: none;
 }

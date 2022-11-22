@@ -1,0 +1,21 @@
+fieldset {
+    border: 1px solid transparent; 
+    box-sizing: border-box; 
+    //grid-area: 1 / 1; 
+    padding: 0px; 
+    width: inherit; 
+}
+
+legend {
+    font: 8pt/0 'Averia Serif Libre'; 
+    margin: auto; 
+    padding: 0 10px; 
+} 
+
+.form-control {
+    width: 200px;
+}
+
+input[type='radio'] {
+    color: black;
+}
