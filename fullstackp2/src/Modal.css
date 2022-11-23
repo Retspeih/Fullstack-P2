@@ -19,3 +19,7 @@ legend {
 input[type='radio'] {
     color: black;
 }
+
+.form-check {
+    color: black;
+}

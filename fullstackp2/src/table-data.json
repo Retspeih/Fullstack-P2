@@ -3,12 +3,12 @@
         "id": 1,
         "description": "Jacob",
         "deadline": "Thornton",
-        "priority": "@fat"
+        "priority": "low"
     },
     {
-        "id": 1,
-        "description": "Jacob",
+        "id": 2,
+        "description": "Yeet",
         "deadline": "Thornton",
-        "priority": "@fat"
+        "priority": "med"
     }
 ]

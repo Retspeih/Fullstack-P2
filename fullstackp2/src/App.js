@@ -5,10 +5,10 @@ import Stack from 'react-bootstrap/Stack';
 import data from './table-data.json'
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faPlusCircle, faPenSquare, faUserXmark } from '@fortawesome/free-solid-svg-icons'
 import './App.css'
-import Popup from './Modal';
 import $ from 'jquery';
+import toastr from 'toastr';
 
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
@@ -16,7 +16,6 @@ import Row from 'react-bootstrap/Row';
 
 function App() {
 
-    {/*const [info, setInfo] = useState(data);*/ }
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
     const [validated, setValidated] = useState(false);
@@ -43,6 +42,7 @@ function App() {
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
+            setValidated(false);
             event.preventDefault();
             event.stopPropagation();
         }
@@ -55,24 +55,66 @@ function App() {
         const form = event.currentTarget;
 
         if (form.checkValidity() === false) {
+            toastr.error('Entry did not add successfully', "Error");
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else {
+            console.log(setInfo);
+
+            //if (!setInfo.includes(addFormData.id)) {
+                const newEntry = {
+                    id: addFormData.id,
+                    description: addFormData.description,
+                    deadline: addFormData.deadline,
+                    priority: addFormData.priority,
+                };
+
+                const newEntries = [...info, newEntry];
+                setInfo(newEntries);
+                setValidated(true);
+                toastr.success('Entry added successfully', "Success");
+                handle1Close();
+            //}
+
+        }
+    };
+
+    const handleEditFormSubmit = (index, event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+
+        if (form.checkValidity() === false) {
+            toastr.error('Entry did not update successfully', "Error");
             event.preventDefault();
             event.stopPropagation();
         }
         else {
             setValidated(true);
 
-            const newEntry = {
+            console.log(addFormData);
+            console.log(addFormData.description);
+
+            setInfo[index] = {
                 id: addFormData.id,
                 description: addFormData.description,
                 deadline: addFormData.deadline,
                 priority: addFormData.priority,
             };
+            toastr.success('Entry updated successfully', "Success");
+            
 
-            const newEntries = [...info, newEntry];
-            setInfo(newEntries);
-            handle1Close();
+            handle2Close();
+
 
         }
+    };
+
+    const handleDelete = (index, e) => {
+        setInfo(info.filter((item, i) => i !== index));
+    };
+
+    const handleDisplay = (index, e) => {
     };
 
     const handle1Close = () => setShow1(false);
@@ -100,11 +142,12 @@ function App() {
     return (
         <div>
             <div className="header">
-                <p className="centered-text">
+                <p className="centered-text header-text">
                     <FontAwesomeIcon icon={faBars} /> FRAMEWORKS
                 </p>
                 <>
-                    <Button variant="primary" onClick={handle1Show}>
+                    <Button variant="primary" onClick={handle1Show} style={{ color: "white", margin: "10px 50px 10px 0px", padding: "0px 30px", boxShadow: "5px 5px 3px rgba(46, 46, 46, 0.62)" }} className="centered-text right-aligned-button">
+                        <FontAwesomeIcon icon={faPlusCircle} />
                         ADD
                     </Button>
 
@@ -151,7 +194,13 @@ function App() {
                                             type={type}
                                             id={`inline-${type}-1`}
                                             onChange={handleAddFormChange}
-                                        />
+                                        >
+                                            <Form.Check.Label>Low</Form.Check.Label>
+                                            <Form.Check.Input type={type} isinValid />
+                                            <Form.Control.Feedback type="invalid">
+                                                Priority is required!
+                                            </Form.Control.Feedback>
+                                        </Form.Check>
                                         <Form.Check
                                             inline
                                             label="Med"
@@ -160,7 +209,13 @@ function App() {
                                             type={type}
                                             id={`inline-${type}-2`}
                                             onChange={handleAddFormChange}
-                                        />
+                                        >
+                                            <Form.Check.Label>Med</Form.Check.Label>
+                                            <Form.Check.Input type={type} isinValid />
+                                            <Form.Control.Feedback type="invalid">
+                                                Priority is required!
+                                            </Form.Control.Feedback>
+                                        </Form.Check>
                                         <Form.Check
                                             inline
                                             label="High"
@@ -169,7 +224,13 @@ function App() {
                                             type={type}
                                             id={`inline-${type}-3`}
                                             onChange={handleAddFormChange}
-                                        />
+                                        >
+                                            <Form.Check.Label>High</Form.Check.Label>
+                                            <Form.Check.Input type={type} isinValid />
+                                            <Form.Control.Feedback type="invalid">
+                                                Priority is required!
+                                            </Form.Control.Feedback>
+                                        </Form.Check>
                                     </div>
                                 ))}
                                 <Button type="submit">ADD</Button>
@@ -191,8 +252,8 @@ function App() {
                     </tr>
                 </thead>
                 <tbody>
-                    {info.map((information) => (
-                        <tr className="centered-text bottom-border">
+                    {info.map((information, index) => (
+                        <tr key={index} className="centered-text bottom-border">
                             <td>{information.id}</td>
                             <td>{information.description}</td>
                             <td>{information.deadline}</td>
@@ -211,7 +272,7 @@ function App() {
                             </td>
                             <td>
                                 <Stack>
-                                    <Button className="action-buttons" onClick={handle2Show} id="">UPDATE</Button>
+                                    <Button className="action-buttons" onClick={handle2Show} id=""><FontAwesomeIcon icon={faPenSquare} /> UPDATE</Button>
 
                                     <Modal show={show2} onHide={handle2Close} id="popup">
                                         <Modal.Header>
@@ -242,40 +303,60 @@ function App() {
                                                     <div key={`inline-${type}`} className="mb-3">
                                                         <Form.Check
                                                             inline
-                                                            label="1"
-                                                            value="1"
+                                                            label="Low"
+                                                            value="Low"
                                                             name="priority"
                                                             type={type}
                                                             id={`inline-${type}-1`}
                                                             onChange={handleAddFormChange}
-                                                        />
+                                                        >
+                                                            <Form.Check.Label>Low</Form.Check.Label>
+                                                            <Form.Check.Input type={type} isinValid />
+                                                            <Form.Control.Feedback type="invalid">
+                                                                Priority is required!
+                                                            </Form.Control.Feedback>
+                                                        </Form.Check>
                                                         <Form.Check
                                                             inline
-                                                            label="2"
-                                                            value="2"
+                                                            label="Med"
+                                                            value="Med"
                                                             name="priority"
                                                             type={type}
                                                             id={`inline-${type}-2`}
                                                             onChange={handleAddFormChange}
-                                                        />
+                                                        >
+                                                            <Form.Check.Label>Med</Form.Check.Label>
+                                                            <Form.Check.Input type={type} isinValid />
+                                                            <Form.Control.Feedback type="invalid">
+                                                                Priority is required!
+                                                            </Form.Control.Feedback>
+                                                        </Form.Check>
                                                         <Form.Check
                                                             inline
-                                                            label="3"
-                                                            value="3"
+                                                            label="High"
+                                                            value="High"
                                                             name="priority"
                                                             type={type}
                                                             id={`inline-${type}-3`}
                                                             onChange={handleAddFormChange}
-                                                        />
+                                                        >
+                                                            <Form.Check.Label>High</Form.Check.Label>
+                                                            <Form.Check.Input type={type} isinValid />
+                                                            <Form.Control.Feedback type="invalid">
+                                                                Priority is required!
+                                                            </Form.Control.Feedback>
+                                                        </Form.Check>
                                                     </div>
                                                 ))}
                                                 <Button type="submit">EDIT</Button>
-                                                <Button variant="danger" onClick={handle2Close}>CANCEL</Button>
+                                                <Button variant="danger" onClick={handle2Close}>
+                                                    <FontAwesomeIcon icon={faUserXmark}></FontAwesomeIcon>CANCEL
+                                                </Button>
                                             </Form>
                                         </Modal.Body>
                                     </Modal>
 
-                                    <Button className="action-buttons" variant="danger">DELETE</Button>
+                                    <Button className="action-buttons" variant="danger" onClick={(e) => handleDelete(index, e)}><FontAwesomeIcon icon={faUserXmark} /> DELETE</Button>
                                 </Stack>
                             </td>
                         </tr>

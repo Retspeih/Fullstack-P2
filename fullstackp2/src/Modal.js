@@ -25,7 +25,7 @@ function Popup() {
         const fieldName = event.target.getAttribute('name');
         const fieldValue = event.target.value;
 
-        const newFormData = { ...addFormData};
+        const newFormData = { ...addFormData };
         newFormData[fieldName] = fieldValue;
 
         setAddFormData(newFormData);
@@ -33,7 +33,7 @@ function Popup() {
 
     const handleAddFormSubmit = (event) => {
         event.preventDefault();
-        
+
         const newEntry = {
             id: addFormData.id,
             description: addFormData.description,
@@ -61,7 +61,7 @@ function Popup() {
     return (
         <>
             <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
+                ADD
             </Button>
 
             <Modal show={show} onHide={handleClose} id="popup">
@@ -97,37 +97,58 @@ function Popup() {
                                 </fieldset>
                             </Form.Group>
                         </Row>
-                        {['radio'].map((type) => (
-                            <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check
-                                    inline
-                                    label="1"
-                                    value="1"
-                                    name="priority"
-                                    type={type}
-                                    id={`inline-${type}-1`}
-                                    onChange={handleAddFormChange}
-                                />
-                                <Form.Check
-                                    inline
-                                    label="2"
-                                    value="2"
-                                    name="priority"
-                                    type={type}
-                                    id={`inline-${type}-2`}
-                                    onChange={handleAddFormChange}
-                                />
-                                <Form.Check
-                                    inline
-                                    label="3"
-                                    value="3"
-                                    name="priority"
-                                    type={type}
-                                    id={`inline-${type}-3`}
-                                    onChange={handleAddFormChange}
-                                />
-                            </div>
-                        ))}
+                        <Form>
+                            {['radio'].map((type) => (
+                                <div key={`inline-${type}`} className="mb-3">
+                                    <Form.Check
+                                        inline
+                                        label="1"
+                                        value="1"
+                                        required
+                                        name="priority"
+                                        type={type}
+                                        id={`inline-${type}-1`}
+                                        onChange={handleAddFormChange}
+                                    >
+                                        <Form.Check.Input type={type} isinValid />
+                                        <Form.Control.Feedback type="invalid">
+                                            Priority is required
+                                        </Form.Control.Feedback>
+                                    </Form.Check>
+                                    <Form.Check
+                                        inline
+                                        label="2"
+                                        value="2"
+                                        required
+                                        name="priority"
+                                        type={type}
+                                        id={`inline-${type}-2`}
+                                        onChange={handleAddFormChange}
+                                    >
+                                        <Form.Check.Input type={type} isinValid />
+                                        <Form.Control.Feedback type="invalid">
+                                            Priority is required
+                                        </Form.Control.Feedback>
+                                    </Form.Check>
+
+                                    <Form.Check
+                                        inline
+                                        label="3"
+                                        value="3"
+                                        required
+                                        name="priority"
+                                        type={type}
+                                        id={`inline-${type}-3`}
+                                        onChange={handleAddFormChange}
+                                    >
+                                        <Form.Check.Input type={type} isinValid />
+                                        <Form.Control.Feedback type="invalid">
+                                            Priority is required
+                                        </Form.Control.Feedback>
+                                    </Form.Check>
+                                </div>
+                            ))}
+                        </Form>
                         <Button type="submit">ADD</Button>
                         <Button variant="danger" onClick={handleClose}>CANCEL</Button>
                     </Form>
