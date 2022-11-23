@@ -112,6 +112,7 @@ function App() {
 
     const handleDelete = (index, e) => {
         setInfo(info.filter((item, i) => i !== index));
+        toastr.success('Entry deleted successfully', "Success");
     };
 
     const handleDisplay = (index, e) => {
