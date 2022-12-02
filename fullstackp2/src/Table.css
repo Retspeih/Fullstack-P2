@@ -1,0 +1,64 @@
+.header {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    background-color: #2345cc;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.header-text {
+    position: relative;
+    top: 10px;
+    color: white;
+}
+
+.right-aligned-button {
+    position: relative;
+    left: 645px;
+    background-color: #2345cc;
+    border-color: #2345cc;
+    margin: 10px 50px 10px 0px;
+    padding: 0px 15px;
+    box-Shadow: 2px 1px 3px rgba(46, 46, 46, 0.62);
+}
+
+.field-set-add {
+    padding:0px;
+    border:none;
+    border-color: #e6e7e8;
+    border-radius: 10px;
+    margin:10px;
+    position: relative;
+    right: 10px;
+}
+
+.legend-border-add {
+    position:absolute;
+    top:-13px;
+    left:15px;
+    background-color:white;
+    text-color: #dcdcde;
+}
+
+.button-field-legend-add {
+    border: none;
+    position: relative;
+    right: 0px;
+}
+
+fieldset, legend {
+    all: revert;
+}
+
+.modal-content {
+    padding: 500x 200px;
+}
+
+.modal-header {
+    background-color: #2345cc;
+    color: white;
+}
+
